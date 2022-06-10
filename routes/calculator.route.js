@@ -39,7 +39,8 @@ router.get("/history/:ip", async (req, res) => {
   try {
     const result = await Calculators.findAll({
       where: { ip_address: req.params.ip },
-      attributes: ['id', 'start_value', 'end_value', 'createdAt']
+      attributes: ['id', 'start_value', 'end_value', 'createdAt'],
+      order: [['createdAt', 'DESC']]
     });
     if (!req.query.page && !req.query.limit) {
       await res.json(result);
